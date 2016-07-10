@@ -1,7 +1,7 @@
 # AnyConfig
 A config project, to solve the problem of changing requirement.
 
-[![Build Status](https://travis-ci.org/zhengyhn/nanyconfig.svg?branch=master)](https://travis-ci.org/zhengyhn/nanyconfig)
+[![Build Status](https://travis-ci.org/zhengyhn/anyconfig.svg?branch=master)](https://travis-ci.org/zhengyhn/anyconfig)
 
 ## Philosophy
 - Anything could change should be regarded as config
