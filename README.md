@@ -1,6 +1,8 @@
 # AnyConfig
 A config project, to solve the problem of changing requirement.
 
+[![Build Status](https://travis-ci.org/zhengyhn/nanyconfig.svg?branch=master)](https://travis-ci.org/zhengyhn/nanyconfig)
+
 ## Philosophy
 - Anything could change should be regarded as config
 - Config must save in database
@@ -94,6 +96,18 @@ request.post(options, function (err, res, result) {
   }
   return cb(null, result.data);
 });
+```
+
+## Test
+
+```
+npm run test
+```
+
+Or test with the coverage report
+
+```
+npm run cover
 ```
 
 ## Licence

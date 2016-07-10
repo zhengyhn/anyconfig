@@ -15,4 +15,16 @@ describe('test anyConfigController', () => {
         });
     });
   });
+
+  describe('toAdd', () => {
+    it('should render add view', function * () {
+      yield request
+        .get('/anyConfig/toAdd')
+        .expect(200)
+        .end((err, res) => {
+          console.error(err);
+          console.info(res.body);
+        });
+    });
+  });
 });
