@@ -1,0 +1,17 @@
+{
+  "name": "anyconfig",
+  "description": "Any config project",
+  "main": "../app.js",
+  "authors": [
+    "zhengyhn <yuanhang.zheng@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zhengyhn/anyconfig",
+  "ignore": [],
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "bootstrap": "^3.3.6",
+    "thenjs": "^2.0.3",
+    "typeahead.js": "^0.11.1"
+  }
+}

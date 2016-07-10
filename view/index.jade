@@ -1,0 +1,22 @@
+extend template 
+
+block css
+  link(rel="stylesheet", href="/css/index.css")
+block script
+  script(src='/bower_components/typeahead.js/dist/typeahead.bundle.min.js')
+  script(src='/js/index.js')
+
+block content
+  .container
+    .row
+      .col-md-3
+      .col-md-6
+        .input-group
+          input#input-search.form-control(type='text', placeholder="Config key")
+          .input-group-btn
+            button#btn-search.btn.btn-default(type='button') Search
+    .row
+      .col-md-3
+      .col-md-6
+        ul#list.list-unstyled
+

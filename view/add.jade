@@ -1,0 +1,28 @@
+extend template 
+
+block css
+  link(rel="stylesheet", href="/css/add.css")
+block script
+  script(src='/js/add.js')
+
+block content
+  .container.form-horizontal
+    .row.form-group.required
+      .col-md-2.control-label
+        label Name:
+      .col-md-3
+        input#name.form-control
+    .row.form-group.required
+      .col-md-2.control-label
+        label Comment:
+      .col-md-3
+        input#comment.form-control
+    .row.form-group.required
+      .col-md-2.control-label
+        label Value:
+      .col-md-10
+        #value
+    .row.form-group
+      .col-md-2
+      .col-md-1
+        button#btn-add.btn.btn-default Add
