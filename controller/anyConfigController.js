@@ -9,6 +9,7 @@ const util = require('../lib/util.js');
 const anyConfig = require('../model/anyConfig.js');
 const wordConfig = require('../model/wordConfig.js');
 const trie = require('../lib/trie.js');
+const updateWordScore = require('../tasks/updateWordScore.js');
 
 exports.index = function * () {
   yield this.render('index');
@@ -45,6 +46,8 @@ exports.add = function * () {
     return util.resErr(this, config.errorMsg.configAlreadyExist);
   }
   yield anyConfig.create(param);
+  updateWordScore();
+  trie.addString(param.key);
 
   return util.resSuc(this);
 };
@@ -64,9 +67,14 @@ exports.view = function * () {
   const param = this.params;
 
   logger.info(param);
-  const data = yield anyConfig.find(param).limit(1).exec();
-  const result = data ? data[0] : '';
+  param.status = 1;
 
+  const result = yield anyConfig.findOne(param).lean().exec();
+
+  logger.info(result);
+  if (_.isObject(result.value)) {
+    result.value = JSON.stringify(result.value);
+  }
   yield this.render('view', {data: result});
 };
 
@@ -80,6 +88,7 @@ exports.update = function * () {
     return util.resErr(this, config.errorMsg.configNotExist);
   }
   yield anyConfig.update({_id: result._id}, {$set: param});
+  updateWordScore();
 
   return util.resSuc(this);
 };

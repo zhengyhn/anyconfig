@@ -18,7 +18,7 @@ const schema = new Schema({
   }
 });
 
-// 加上createdAt, updatedAt
+// add createdAt, updatedAt
 schema.set('timestamps', true);
 schema.index({status: 1});
 schema.index({key: 1});

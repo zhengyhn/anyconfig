@@ -21,5 +21,3 @@ var opts = {
 , position: 'absolute' // Element positioning
 }
 var $spinner = new Spinner(opts);
-
-JSONEditor.defaults.options.theme = 'bootstrap3';

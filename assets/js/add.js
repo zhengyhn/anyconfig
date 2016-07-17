@@ -1,6 +1,6 @@
 var options = {
-  schema: {
-  }
+  mode: 'tree',
+  modes: ['tree', 'code']
 };
 
 var editor = new JSONEditor(document.getElementById('value'), options);
@@ -26,21 +26,17 @@ $('#name').change(function () {
 $('#btn-add').click(function () {
   $('#spin').text('');
 
-  var errors = editor.validate();
-  if(errors.length) {
-    return $('#spin').text('配置值json 错误!');
-  }
-  var value = editor.getValue();
-  console.info(value);
+  var value = editor.get();
 
   if (!value) {
-    return $('#spin').text('配置值不能为空');
+    return $('#spin').text('The value cannot be null');
   }
   if (_.isObject(value) && _.isEmpty(value)) {
-    return $('#spin').text('配置值不能为空');
+    return $('#spin').text('The value cannot be null');
   }
 
   $spinner.spin($('#spin').get(0));
+
   $.ajax({
     method: 'POST',
     url: '/anyconfig/add',

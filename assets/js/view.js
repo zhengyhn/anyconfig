@@ -1,10 +1,16 @@
 var options = {
-  schema: {
-  }
+  mode: 'view'
 };
 
 var editor = new JSONEditor(document.getElementById('value'), options);
-editor.setValue($('#hidden').val());
+
+try {
+  var value = JSON.parse($('#hidden').val());
+} catch (e) {
+  var value = $('#hidden').val();
+}
+editor.set(value);
+
 readonly(true);
 
 $('#btn-submit').toggle();
@@ -23,18 +29,13 @@ $('#btn-cancel').click(function () {
 $('#btn-submit').click(function () {
   $('#spin').text('');
 
-  var errors = editor.validate();
-  if(errors.length) {
-    return $('#spin').text('配置值json 错误!');
-  }
-  var value = editor.getValue();
-  console.info(value);
+  var value = editor.get();
 
   if (!value) {
-    return $('#spin').text('配置值不能为空');
+    return $('#spin').text('The value cannot be null');
   }
   if (_.isObject(value) && _.isEmpty(value)) {
-    return $('#spin').text('配置值不能为空');
+    return $('#spin').text('The value cannot be null');
   }
 
   $spinner.spin($('#spin').get(0));
@@ -69,11 +70,12 @@ function toggleBtn() {
 }
 
 function readonly(readonly) {
-  if (readonly) {
-    editor.disable();
-  } else {
-    editor.enable();
-  }
   $('#name').attr('readonly', readonly);
   $('#comment').attr('readonly', readonly);
+  if (readonly) {
+    editor.setMode('view');
+    editor.expandAll();
+  } else {
+    editor.setMode('tree');
+  }
 }
