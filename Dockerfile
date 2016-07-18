@@ -1,5 +1,5 @@
 # FROM r-klg.com/klg-node-4x
-FROM anyconfig:base
+FROM r-klg.com/anyconfig:base
 
 WORKDIR /apps/anyconfig
 RUN mv ./node_modules ../ &&\
