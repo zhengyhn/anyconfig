@@ -11,5 +11,9 @@ app:
   - MONGO_ANYCONFIG=${mongo_anyconfig}
   volumes_from:
   - log
+  extra_hosts:
+  - "tiger.local:${tiger}"
+  - "lion.local:${lion}"
+  - "gentoo.local:${gentoo}"
   ports:
   - "8081:8081"
