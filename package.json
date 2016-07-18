@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start": "ENV=dev nodemon app.js",
+    "start": "ENV=prod node app.js",
     "test": "./node_modules/mocha/bin/_mocha --require co-mocha --recursive test/",
     "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive test/"
   },
