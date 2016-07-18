@@ -8,9 +8,7 @@ app:
   - LANG=en_US.UTF-8
   - LANGUAGE=en_US:en
   - LC_ALL=en_US.UTF-8
-  external_links:
   volumes_from:
   - log
-  extra_hosts:
   ports:
   - "8081:8081"
