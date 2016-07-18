@@ -8,11 +8,15 @@ RUN mv ./node_modules ../ &&\
 RUN mv ./assets/bower_components ../ &&\
 		rm -rf * &&\
 		mv ../bower_components ./assets
+
 ADD . .
 
 RUN npm install --production &&\
 	npm cache clean
 RUN cd ./assets/ && bower install
+
+RUN npm install -g bower
+RUN cd ./assets/ && bower install --allow-root
 
 EXPOSE 8081
 CMD ["npm","start"]
