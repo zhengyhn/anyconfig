@@ -27,5 +27,5 @@ if (!module.parent) {
     logger.info('Server listening on: ', config.app.port);
   });
 
-  schedule.scheduleJob('*/5 * * * *', updateWordScore);
+  schedule.scheduleJob('* */3 * * *', updateWordScore);
 }

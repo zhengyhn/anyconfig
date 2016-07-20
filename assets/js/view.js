@@ -1,5 +1,6 @@
 var options = {
-  mode: 'view'
+  mode: 'view',
+  modes: ['tree', 'code']
 };
 
 var editor = new JSONEditor(document.getElementById('value'), options);
