@@ -3,17 +3,17 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
+    "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive test/",
     "start": "ENV=prod node app.js",
-    "test": "./node_modules/mocha/bin/_mocha --require co-mocha --recursive test/",
-    "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive test/"
+    "test": "./node_modules/mocha/bin/_mocha --require co-mocha --recursive test/"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/zhengyhn/anyconfig.git"
   },
   "keywords": [
-    "config",
-    "anyconfig"
+    "anyconfig",
+    "config"
   ],
   "author": "hank <yuanhang.zheng@qq.com> (http://zhengyhn.github.io)",
   "license": "MIT",
