@@ -22,5 +22,3 @@ after(function * (done) {
 module.exports = {
   request: supertest('http://' + config.app.host + ':' + config.app.port)
 };
-
-

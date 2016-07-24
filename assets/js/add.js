@@ -28,7 +28,7 @@ $('#btn-add').click(function () {
 
   var value = editor.get();
 
-  if (!value) {
+  if (value === '') {
     return $('#spin').text('The value cannot be null');
   }
   if (_.isObject(value) && _.isEmpty(value)) {
@@ -46,13 +46,12 @@ $('#btn-add').click(function () {
       value: value
     }
   }).done(function (res) {
-    $spinner.stop();
-
     if (res.code) {
       $('#spin').text(res.msg);
     } else {
       window.location = '/anyConfig/view/' + $('#name').val();
     }
+    $spinner.stop();
   }).fail(function (res) {
     $('#spin').text(res.msg);
     $spinner.stop();

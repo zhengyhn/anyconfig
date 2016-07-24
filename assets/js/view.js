@@ -32,7 +32,7 @@ $('#btn-submit').click(function () {
 
   var value = editor.get();
 
-  if (!value) {
+  if (value === '') {
     return $('#spin').text('The value cannot be null');
   }
   if (_.isObject(value) && _.isEmpty(value)) {
@@ -49,16 +49,15 @@ $('#btn-submit').click(function () {
       value: value
     }
   }).done(function (res) {
-    $spinner.stop();
-
     if (res.code) {
       $('#spin').text(res.msg);
     }
     readonly(true);
+    $spinner.stop();
   }).fail(function (res) {
     $('#spin').text(res.msg);
-    $spinner.stop();
     readonly(true);
+    $spinner.stop();
   });
 
   toggleBtn();
