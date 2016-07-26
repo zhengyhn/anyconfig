@@ -9,7 +9,7 @@ $('#name').change(function () {
   $('#spin').text('');
 
   $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: '/anyconfig/checkkey',
     data: {
       key: $('#name').val()

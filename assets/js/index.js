@@ -33,7 +33,7 @@ $('#input-search').on('input propertychange', function (event) {
   }
 
   $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: '/anyconfig/getPrompts',
     data: {
       key: key
@@ -64,7 +64,7 @@ function search () {
   }
   $spinner.spin($('#spin').get(0));
   $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: '/anyconfig/search',
     data: {
       text: text

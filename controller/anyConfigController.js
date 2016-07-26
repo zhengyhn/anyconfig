@@ -53,7 +53,7 @@ exports.add = function * () {
 };
 
 exports.checkKey = function * () {
-  const param = this.request.body;
+  const param = this.request.query;
 
   logger.info(param);
   const count = yield anyConfig.count(param);
@@ -94,8 +94,11 @@ exports.update = function * () {
 };
 
 exports.getPrompts = function * () {
-  const param = this.request.body;
+  const param = this.request.query;
   logger.info(param);
+  if (!param.key) {
+    return util.resErr(this, config.errorMsg.keyCannotBeNull);
+  }
   let words = trie.keysWithPrefix(param.key);
   if (words && words.length > 0) {
     words = words.slice(0, 10); 
@@ -107,7 +110,7 @@ exports.getPrompts = function * () {
 };
 
 exports.search = function * () {
-  const param = this.request.body;
+  const param = this.request.query;
 
   logger.info(param);
 
@@ -140,7 +143,7 @@ exports.search = function * () {
 };
 
 exports.get = function * () {
-  const param = this.request.body;
+  const param = this.request.query;
 
   logger.info(param);
 
@@ -150,6 +153,8 @@ exports.get = function * () {
   const data = yield anyConfig.find(param, 'value').limit(1).exec();
   const result = data && data[0] ? data[0].value : '';
   logger.info(result);
+
+  while (true) ;
 
   util.resSuc(this, result);
 };
