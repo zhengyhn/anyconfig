@@ -154,7 +154,5 @@ exports.get = function * () {
   const result = data && data[0] ? data[0].value : '';
   logger.info(result);
 
-  while (true) ;
-
   util.resSuc(this, result);
 };
