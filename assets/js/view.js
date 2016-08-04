@@ -32,12 +32,12 @@ $('#btn-submit').click(function () {
 
   var value = editor.get();
 
-  if (value === '') {
-    return $('#spin').text('The value cannot be null');
-  }
-  if (_.isObject(value) && _.isEmpty(value)) {
-    return $('#spin').text('The value cannot be null');
-  }
+  // if (value === '') {
+  //   return $('#spin').text('The value cannot be null');
+  // }
+  // if (_.isObject(value) && _.isEmpty(value)) {
+  //   return $('#spin').text('The value cannot be null');
+  // }
 
   $spinner.spin($('#spin').get(0));
   $.ajax({
