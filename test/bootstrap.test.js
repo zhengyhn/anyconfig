@@ -2,8 +2,7 @@
 
 const supertest = require('co-supertest');
 const mocha = require('co-mocha');
-
-process.env.ENV = 'test';
+const anyConfigDb = require('../lib/db.js').anyConfig;
 
 const config = require('../lib/config.js');
 const app = require('../app.js');
@@ -16,6 +15,9 @@ before(function * () {
 });
 
 after(function * (done) {
+  // clear test database data
+  anyConfigDb.db.dropDatabase();
+  // shutdown the test server
   app.server.close(done);
 });
 

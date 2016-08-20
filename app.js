@@ -4,19 +4,23 @@ const schedule = require('node-schedule');
 const app = require('koa')();
 const koaLogger = require('koa-logger');
 const bodyparser = require('koa-bodyparser');
-const errorhandler = require('koa-errorhandler');
 const views = require('koa-views');
 const staticCache = require('koa-static-cache');
 
 const config = require('./lib/config.js');
 const logger = require('./lib/logger.js');
+
+const httpLogger = require('./middleware/httpLogger.js');
+const errorHandler = require('./middleware/errorHandler.js');
+
 const router = require('./router.js');
 const updateWordScore = require('./tasks/updateWordScore.js');
 
-app.use(errorhandler());
+app.use(errorHandler);
 app.use(bodyparser());
 app.use(staticCache(config.app.staticCacheConf));
 app.use(koaLogger());
+app.use(httpLogger);
 app.use(views(config.app.viewPath, config.app.viewConf));
 app.use(router.routes());
 

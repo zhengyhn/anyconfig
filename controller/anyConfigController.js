@@ -10,6 +10,7 @@ const anyConfig = require('../model/anyConfig.js');
 const wordConfig = require('../model/wordConfig.js');
 const trie = require('../lib/trie.js');
 const updateWordScore = require('../tasks/updateWordScore.js');
+const anyConfigService = require('../service/anyConfigService.js');
 
 exports.index = function * () {
   yield this.render('index');
@@ -39,15 +40,7 @@ exports.checkParam = function * (next) {
 exports.add = function * () {
   const param = this.request.body;
 
-  logger.info(param);
-
-  const count = yield anyConfig.count({key: param.key});
-  if (count > 0) {
-    return util.resErr(this, config.errorMsg.configAlreadyExist);
-  }
-  yield anyConfig.create(param);
-  updateWordScore();
-  trie.addString(param.key);
+  yield anyConfigService.add(param);
 
   return util.resSuc(this);
 };
@@ -55,11 +48,8 @@ exports.add = function * () {
 exports.checkKey = function * () {
   const param = this.request.query;
 
-  logger.info(param);
-  const count = yield anyConfig.count(param);
-  if (count > 0) {
-    return util.resErr(this, config.errorMsg.configAlreadyExist);
-  }
+  yield anyConfigService.checkKey(param.key);
+
   return util.resSuc(this);
 };
 
