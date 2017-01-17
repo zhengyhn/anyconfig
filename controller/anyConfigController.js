@@ -20,6 +20,9 @@ exports.toAdd = function * () {
   yield this.render('add');
 };
 
+/**
+ * @param {function} next
+ */
 exports.checkParam = function * (next) {
   const param = this.request.body;
   logger.info(param);
@@ -37,6 +40,9 @@ exports.checkParam = function * (next) {
   yield next;
 };
 
+/**
+ * add a config
+ */
 exports.add = function * () {
   const param = this.request.body;
 
@@ -133,16 +139,40 @@ exports.search = function * () {
 };
 
 exports.get = function * () {
+  const LOG_TAG = 'anyConfigController.get'
   const param = this.request.query;
 
-  logger.info(param);
+  logger.info(LOG_TAG, param);
 
   if (!param.key) {
     return util.resErr(this, config.errorMsg.keyCannotBeNull);
   }
   const data = yield anyConfig.find(param, 'value').limit(1).exec();
   const result = data && data[0] ? data[0].value : '';
-  logger.info(result);
+
+  logger.info(LOG_TAG, result);
+
+  util.resSuc(this, result);
+};
+
+exports.getMultiple = function * () {
+  const LOG_TAG = 'anyConfigController.getMultiple'
+  const param = this.request.query;
+
+  logger.info(LOG_TAG, param);
+
+  if (!param.key) {
+    return util.resErr(this, config.errorMsg.keyCannotBeNull);
+  }
+  let keys = param.key.split(',');
+  const items = yield anyConfig.find({key: {$in: keys}}, 'key value').exec();
+  let result = {};
+  if (items && items.length > 0) {
+    for (const item of items) {
+      result[item.key] = item.value
+    }
+  }
+  logger.info(LOG_TAG, result);
 
   util.resSuc(this, result);
 };

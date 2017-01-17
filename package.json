@@ -39,6 +39,8 @@
   "devDependencies": {
     "co-mocha": "^1.1.2",
     "co-supertest": "0.0.10",
+    "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^0.3.0",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "should": "^9.0.2",

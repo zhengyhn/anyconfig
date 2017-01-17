@@ -27,4 +27,17 @@ describe('test anyConfigController', () => {
         });
     });
   });
+
+  describe.only('test get', () => {
+    it('should return config', function * () {
+      yield request
+        .get('/api/get?key=aaa')
+        .set('token', '013918fe4ab81be96cc52a37ce6dd8db')
+        .expect(200)
+        .end((err, res) => {
+          console.error(err);
+          console.info(res.body);
+        });
+    });
+  });
 });

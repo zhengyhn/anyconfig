@@ -21,5 +21,6 @@ router.get('/anyconfig/search', anyConfigController.search);
 
 // apis for external
 router.get('/api/get', auth.tokenRequire, anyConfigController.get);
+router.get('/api/getMultiple', auth.tokenRequire, anyConfigController.getMultiple);
 
 module.exports = router;
