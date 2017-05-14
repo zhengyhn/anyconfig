@@ -7,16 +7,16 @@ const config = require('./config.js');
 module.exports = {
   /**
    * Return error response
-   * 
+   *
    * @param {Object} context
-   * @param {String} msg 
+   * @param {String} msg
    * @return {Object} {
    *     code: -1,
    *     msg: 'xxx'
    *   }
    */
   resErr: function (context, msg) {
-    return context.response.body = {
+    context.response.body = {
       code: config.statusCode.error,
       msg: msg || 'Unknown error'
     };
@@ -24,7 +24,7 @@ module.exports = {
 
   /**
    * Return success response
-   * 
+   *
    * @param {Object} context
    * @param {Object} data
    * @return {Object} {
@@ -33,7 +33,38 @@ module.exports = {
    *   }
    */
   resSuc: function (context, data) {
-    return context.response.body = {code: config.statusCode.success, data: data || {}}
+    context.response.body = {code: config.statusCode.success, data: data || {}}
+  },
+
+  /**
+   * Return rpc error response
+   *
+   * @param {Object} context
+   * @param {String} msg
+   * @return {Object} {
+   *     code: -1,
+   *     msg: 'xxx'
+   *   }
+   */
+  rpcErr: function (msg) {
+    return {
+      code: config.statusCode.error,
+      msg: msg || 'Unknown error'
+    };
+  },
+
+  /**
+   * Return rpc success response
+   *
+   * @param {Object} context
+   * @param {Object} data
+   * @return {Object} {
+   *     code: 0,
+   *     data: 'object'
+   *   }
+   */
+  rpcSuc: function (data) {
+    return {code: config.statusCode.success, data: data || {}}
   },
 
   /**

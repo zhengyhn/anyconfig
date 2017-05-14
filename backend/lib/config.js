@@ -11,11 +11,13 @@ const baseConfig = {
     name: 'anyconfig',
     env: ENV,
     isProd: (ENV === 'prod'),
-    locale: 'zh_CN',
+    host: process.env.HOST,
+    port: process.env.PORT,
+    locale: process.env.LOCALE || 'zh_CN',
     timezone: 'Asia/Shanghai',
     token: '013918fe4ab81be96cc52a37ce6dd8db',
-    staticCacheConf: path.join(__dirname, '/../assets'),
-    viewPath: path.join(__dirname + '/../view'),
+    staticCacheConf: path.join(__dirname, '/../../assets'),
+    viewPath: path.join(__dirname, '/../../view'),
     viewConf: {map: {html: 'jade'}, extension: 'jade'},
     log: {
       dir: process.env.LOG_DIR || path.resolve(root, 'log'),
@@ -28,36 +30,12 @@ const baseConfig = {
   },
   jieba: {
     maxWordLimit: 10000
-  }
-};
-
-const platformConfig = {
-  dev: {
-    app: {
-      host: process.env.HOST || 'localhost',
-      port: process.env.PORT || 8081
-    },
-    mongo_anyconfig: {
-      uri: process.env.MONGO_ANYCONFIG || 'mongodb://localhost:27017/anyconfig'
-    }
   },
-  test: {
-    app: {
-      host: process.env.HOST || 'localhost',
-      port: process.env.PORT || 8082
-    },
-    mongo_anyconfig: {
-      uri: process.env.MONGO_ANYCONFIG || 'mongodb://localhost:27017/anyconfig-test'
-    }
+  mongo_anyconfig: {
+    uri: process.env.MONGO_ANYCONFIG
   },
-  prod: {
-    app: {
-      host: process.env.HOST || 'localhost',
-      port: process.env.PORT || 8081,
-    },
-    mongo_anyconfig: {
-      uri: process.env.MONGO_ANYCONFIG || 'mongodb://localhost:27017/anyconfig'
-    }
+  rabbitmq: {
+    url: process.env.RABBITMQ_URL
   }
 };
 
@@ -86,7 +64,6 @@ const localeConfig = {
   }
 };
 
-let config = _.merge(baseConfig, platformConfig[ENV]);
-config = _.merge(config, localeConfig[config.app.locale]);
+const config = _.merge(baseConfig, localeConfig[baseConfig.app.locale]);
 
 module.exports = config;

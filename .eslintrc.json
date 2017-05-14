@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "./node_modules/eslint-config-standard/eslintrc.json"
+  ],
+  "env": {
+    "browser": false,
+    "node": true,
+    "es6": true
+  },
+  "globals": {
+    "describe": true,
+    "it": true,
+    "before": true,
+    "after": true
+  },
+  "rules": {
+    "semi": 0,
+    "standard/no-callback-literal": 1
+  }
+}

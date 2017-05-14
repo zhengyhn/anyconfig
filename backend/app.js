@@ -1,6 +1,5 @@
 'use strict'
 
-const schedule = require('node-schedule');
 const app = require('koa')();
 const koaLogger = require('koa-logger');
 const bodyparser = require('koa-bodyparser');
@@ -14,7 +13,7 @@ const httpLogger = require('./middleware/httpLogger.js');
 const errorHandler = require('./middleware/errorHandler.js');
 
 const router = require('./router.js');
-const updateWordScore = require('./tasks/updateWordScore.js');
+const rpcRouter = require('./rpcRouter.js');
 
 app.use(errorHandler);
 app.use(bodyparser());
@@ -30,6 +29,4 @@ if (!module.parent) {
   app.listen(config.app.port, function () {
     logger.info('Server listening on: ', config.app.port);
   });
-
-  schedule.scheduleJob('0 0 1 1 *', updateWordScore);
 }

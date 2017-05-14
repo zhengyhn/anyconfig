@@ -5,7 +5,8 @@
   "scripts": {
     "cover": "ENV=test ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive test/",
     "start": "ENV=prod node app.js",
-    "test": "ENV=test ./node_modules/mocha/bin/_mocha --require co-mocha --recursive test/"
+    "hank": "ENV=dev MONGO_ANYCONFIG=mongodb://localhost:27017/new_koala HOST=localhost PORT=8081 RABBITMQ_URL=amqp://guest:guest@localhost:5672 nodemon backend/app.js",
+    "test": "ENV=test MONGO_ANYCONFIG=mongodb://localhost:27017/new_koala HOST=localhost PORT=8082 RABBITMQ_URL=amqp://guest:guest@localhost:5672 ./node_modules/mocha/bin/_mocha --require co-mocha --recursive backend/test/bootstrap.test.js backend/test/"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,10 @@
   "author": "hank <yuanhang.zheng@qq.com> (http://zhengyhn.github.io)",
   "license": "MIT",
   "dependencies": {
+    "bower": "^1.8.0",
     "co": "^4.6.0",
     "jade": "^1.11.0",
+    "joi": "^10.4.2",
     "koa": "^1.2.0",
     "koa-bodyparser": "^2.0.1",
     "koa-errorhandler": "^0.1.1",
@@ -31,19 +34,21 @@
     "moment-timezone": "^0.5.3",
     "mongoose": "^4.4.14",
     "natural": "^0.4.0",
-    "node-schedule": "^1.1.1",
     "nodejieba": "^2.2.1",
-    "winston": "^2.2.0",
-    "winston-daily-rotate-file": "^1.0.1"
+    "servicebus": "^2.0.10",
+    "tracer": "^0.8.9"
   },
   "devDependencies": {
     "co-mocha": "^1.1.2",
-    "co-supertest": "0.0.10",
-    "gulp": "^3.9.1",
-    "gulp-jsdoc3": "^0.3.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "should": "^9.0.2",
-    "supertest": "^1.2.0"
+    "supertest": "^3.0.0"
   }
 }

@@ -9,8 +9,9 @@ const util = require('../lib/util.js');
 const anyConfig = require('../model/anyConfig.js');
 const wordConfig = require('../model/wordConfig.js');
 const trie = require('../lib/trie.js');
-const updateWordScore = require('../tasks/updateWordScore.js');
+const updateWordScore = require('../lib/updateWordScore.js');
 const anyConfigService = require('../service/anyConfigService.js');
+const amqp = require('../lib/amqp.js');
 
 exports.index = function * () {
   yield this.render('index');
@@ -86,6 +87,8 @@ exports.update = function * () {
   yield anyConfig.update({_id: result._id}, {$set: param});
   updateWordScore();
 
+  amqp.publish('koala.anyconfig.updated', {key: param.key});
+
   return util.resSuc(this);
 };
 
@@ -97,7 +100,7 @@ exports.getPrompts = function * () {
   }
   let words = trie.keysWithPrefix(param.key);
   if (words && words.length > 0) {
-    words = words.slice(0, 10); 
+    words = words.slice(0, 10);
   } else {
     words = [];
   }
@@ -147,10 +150,7 @@ exports.get = function * () {
   if (!param.key) {
     return util.resErr(this, config.errorMsg.keyCannotBeNull);
   }
-  const data = yield anyConfig.find(param, 'value').limit(1).exec();
-  const result = data && data[0] ? data[0].value : '';
-
-  logger.info(LOG_TAG, result);
+  const result = yield anyConfigService.get(param);
 
   util.resSuc(this, result);
 };
