@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "cover": "ENV=test ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive test/",
-    "start": "ENV=prod node app.js",
+    "start": "ENV=prod node backend/app.js",
     "hank": "ENV=dev MONGO_ANYCONFIG=mongodb://localhost:27017/new_koala HOST=localhost PORT=8081 RABBITMQ_URL=amqp://guest:guest@localhost:5672 nodemon backend/app.js",
     "test": "ENV=test MONGO_ANYCONFIG=mongodb://localhost:27017/new_koala HOST=localhost PORT=8082 RABBITMQ_URL=amqp://guest:guest@localhost:5672 ./node_modules/mocha/bin/_mocha --require co-mocha --recursive backend/test/bootstrap.test.js backend/test/"
   },
@@ -19,6 +19,7 @@
   "author": "hank <yuanhang.zheng@qq.com> (http://zhengyhn.github.io)",
   "license": "MIT",
   "dependencies": {
+    "amqp-rpc": "0.0.8",
     "bower": "^1.8.0",
     "co": "^4.6.0",
     "jade": "^1.11.0",
